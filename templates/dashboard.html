@@ -4,45 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord</title>
+    <style>
+        /* Collez le contenu de votre fichier joli.css ici */
+        /* Par exemple: */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td, h2 {
+            border: 1px solid black;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        /* ... et ainsi de suite pour tous vos styles */
+
+        /* Styles spécifiques pour le thead */
+        thead {
+            background-color: #333; /* Une couleur de fond foncée */
+            color: #ddbcbc; /* Texte blanc pour une bonne visibilité sur le fond foncé */
+        }
+
+        thead th {
+            border: 1px solid #fff; /* Bordure blanche pour les en-têtes */
+            font-weight: bold; /* Texte en gras */
+            padding: 10px 15px; /* Un peu plus d'espacement pour les en-têtes */
+        }
+
+    </style>
+
 </head>
 <body>
 
 
 
-<h2>KeePass</h2>
-<table border="1">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Login</th>
-            <th>Mot de passe</th>
-            <th>Qualité (longueur)</th>
-            <th>Qualité (robustesse)</th>
-            <th>Fuite en ligne</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for site in data['sites'] %}
-        <tr>
-            <td>{{ site['nom'] }}</td>
-            <td>{{ site['login'] }}</td>
-            <td>{{ site['mot_de_passe'] }}</td>
-            <td>{{ site['password_length'] }}</td>
-            <td style="color: {{ site['strength']['color'] }}">{{ site['strength']['description'] }}/5</td>
-            <td>{{ "OUI" if site['leaked_online'] else "NON" }}</td>
-            <td>
-                <button class="delete-button" data-index="{{ loop.index }}">Supprimer</button>
-            </td>
-            <td>
-                <button class="edit-button" data-index="{{ loop.index0 }}">Modifier</button>
-                
-            </td>
-            
-        </tr>
-        
-        
-        {% endfor %}
-    </tbody>
+    <h2>KeePass</h2>
+    <table> <!-- Ajout de cette balise -->
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Login</th>
+                <th>Mot de passe</th>
+                <th>Qualité (longueur)</th>
+                <th>Qualité (robustesse)</th>
+                <th>Fuite en ligne</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for site in data['sites']%}
+            <tr>
+                <td>{{ site['nom'] }}</td>
+                <td>{{ site['login'] }}</td>
+                <td>{{ site['mot_de_passe'] }}</td>
+                <td>{{ site['password_length'] }}</td>
+                <td style="color: {{ site['strength']['color'] }}">{{ site['strength']['description'] }}/5</td>
+                <td>{{ "OUI" if site['leaked_online'] else "NON" }}</td>
+                <td>
+                    <button class="delete-button" data-index="{{ loop.index }}">Supprimer</button>
+                </td>
+                <td>
+                    <button class="edit-button" data-index="{{ loop.index0 }}">Modifier</button>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
 </table>
 
 <div id="edit-form-container" style="display: none;">
