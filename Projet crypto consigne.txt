@@ -1,0 +1,27 @@
+Création d’une plateforme permettant de gérer ses mots de passe. Le projet est comparable à la solution « KeePass » mais en version web.
+Le fonctionnement global est le suivant :
+
+
+
+
+L’utilisateur a deux possibilités : utiliser un coffre-fort existant ou bien en créer un nouveau
+L’ouverture d’un coffre-fort existant nécessite de rentrer le mot de passe utilisé par celui-ci
+La création d’un coffre-fort nouveau nécessite le choix d’un mot de passe
+Une fois ouvert (ou créé) l’utilisateur peut gérer sa liste de mots de passe (ajout, suppression et édition)
+L’utilisateur peut exporter son coffre-fort à tout moment (pour ensuite le réimporter dans l’application)
+On va y aller doucement et on va faire d'abord l'html avec quelque chose de très minimale (je te laisse proposer)
+propose aussi les étapes en amont du projet
+
+
+la version 1 devra comporter ceci :
+Cryptographie côté serveur
+Gestionnaire minimaliste
+
+
+
+
+la version 2 devra comporter ceci :
+Cryptographie côté client
+Stockage des coffre-fort dans le navigateur (ex : local storage)
+Fonctionnalités complémentaires : génération de mots de passe aléatoires, indication sur la robustesse, vérification si le mot de passe a fuité en ligne, …
+Gestion de catégories pour ranger et trier les différents mots de passe

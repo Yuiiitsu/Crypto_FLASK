@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenu du JSON</title>
+</head>
+<body>
+    <h2>Coffre: {{ data["coffre"] }}</h2>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nom du site</th>
+                <th>Login</th>
+                <th>Mot de passe</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for site in data["sites"] %}
+            <tr>
+                <td>{{ site["nom"] }}</td>
+                <td>{{ site["login"] }}</td>
+                <td>{{ site["mot_de_passe"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
