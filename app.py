@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from cryptography.fernet import Fernet
 import requests
 import hashlib
+import random 
 
 app = Flask(__name__)
 app.secret_key = 'votre_clé_secrète_ici'
@@ -245,12 +246,6 @@ def edit_site():
         site = data['sites'][int(index)]
         
         return render_template('dashboard.html', site=site, index=index)
-
-
-
-
-
-
 
 
 

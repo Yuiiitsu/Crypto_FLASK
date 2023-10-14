@@ -59,8 +59,11 @@
                 <td><input type="text" name="login" id="edit-login" required></td>
             </tr>
             <tr>
-                <td><label for="edit-mot_de_passe">Mot de passe:</label></td>
-                <td><input type="password" name="mot_de_passe" id="edit-mot_de_passe" required></td>
+                <td>
+                    <label for="edit-mot_de_passe">Mot de passe:</label></td>
+                <td>
+                    <input type="password" name="mot_de_passe" id="edit-mot_de_passe" required></td>
+                    <button type="button" id="edit-generate-password">Générer</button>
             </tr>
         </table>
         <input type="submit" value="Mettre à jour">
@@ -82,12 +85,27 @@
         </tr>
         <tr>
             <td><label for="mot_de_passe">Mot de passe:</label></td>
-            <td><input type="password" name="mot_de_passe" required></td>
+            <td>
+                <input type="password" name="mot_de_passe" id="mot_de_passe" required>
+                <button type="button" id="generate-password">Générer</button>
+            </td>
         </tr>
+        
     </table>
     <input type="submit" value="Ajouter">
 </form>
 <script>
+
+    function generateRandomPassword() {
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+|}{[]:;?><,./-=";
+        let password = "";
+        for (let i = 0; i < 42; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset.charAt(randomIndex);
+        }
+        return password;
+    }
+
     const deleteButtons = document.querySelectorAll('.delete-button');
     deleteButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -145,6 +163,16 @@
             document.getElementById('edit-index').value = index;
         });
     });
+});
+
+document.getElementById('generate-password').addEventListener('click', function() {
+    const password = generateRandomPassword();
+    document.getElementById('mot_de_passe').value = password;
+});
+
+document.getElementById('edit-generate-password').addEventListener('click', function() {
+    const password = generateRandomPassword();
+    document.getElementById('edit-mot_de_passe').value = password;
 });
 
 </script>
