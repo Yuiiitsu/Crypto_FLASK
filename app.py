@@ -5,7 +5,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from cryptography.fernet import Fernet
 import requests
 import hashlib
-import random 
 
 app = Flask(__name__)
 app.secret_key = 'votre_clé_secrète_ici'
@@ -111,20 +110,6 @@ password_descriptions = {
 }
 
 
-@app.route('/keepass')
-def keepass():
-    if 'logged_in' not in session or not session['logged_in']:
-        flash('Veuillez vous connecter d\'abord.', 'danger')
-        return redirect(url_for('login'))
-    return render_template('keepass.html', database=database)
-
-@app.route('/decrypt/<int:index>', methods=['GET'])
-def decrypt_data(index):
-    encrypted_data = database[index]['mdp']
-    decrypted_data = cipher_suite.decrypt(encrypted_data.encode()).decode()
-    flash(f'Mot de passe décrypté pour {database[index]["nom"]}: {decrypted_data}', 'info')
-    return redirect(url_for('keepass'))
-
 def password_strength(password):
     length = len(password.encode('utf-8'))  
     if length < 15:
@@ -180,22 +165,6 @@ def evaluate_password_strength(password):
 
 
 
-
-# Simuler une base de données
-database = [
-    {
-        'nom': 'Facebook',
-        'username': 'mon_email@gmail.com',
-        'mdp': cipher_suite.encrypt('mon_mot_de_passe_facebook'.encode()).decode(),
-        'lien': 'https://www.facebook.com/'
-    },
-    {
-        'nom': 'Gmail',
-        'username': 'mon_email@gmail.com',
-        'mdp': cipher_suite.encrypt('mon_mot_de_passe_gmail'.encode()).decode(),
-        'lien': 'https://mail.google.com/'
-    }
-]
 
 
 @app.route('/dashboard/delete/<int:index>', methods=['DELETE'])
